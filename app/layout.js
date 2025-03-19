@@ -31,13 +31,20 @@ export default function RootLayout({ children }) {
   return (
     <ClerkProvider>
 
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
       <link rel="icon" href="/favicon.png" />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <ThemeProvider
+            attribute="class"
+            defaultTheme="light"
+            enableSystem
+            disableTransitionOnChange
+          >
+
           <ClerkLoading className="flex items-center justify-center">
             <div className="w-full h-screen flex items-center justify-center text-2xl">
               <Loader/>
@@ -45,12 +52,13 @@ export default function RootLayout({ children }) {
           </ClerkLoading>
           <ClerkLoaded>
             <Provider>
-           
+              
               {children}
                 <Toaster /> 
                 <Footer/>
             </Provider>
           </ClerkLoaded>
+          </ThemeProvider>
           <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
       </body>
     </html>
